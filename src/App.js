@@ -1,75 +1,15 @@
-import './App.css';
-import React, { useState, useEffect } from 'react';
-import { Navbar, Header, Main, Footer, Reservations, OrderOnline } from './components';
-import { Routes, Route, useLocation } from 'react-router-dom';
-import { headerData, reservationData, orderOnline } from './constants';
-import DataContext from './DataContext';
-import ConfirmedBooking from './components/Reservations/ConfirmedBooking';
+import Navbar from './components/Navbar';
+import Routing from './components/Routing';
+import Footer from './components/Footer';
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
+import './App.css'
 
-function App() {
-  const location = useLocation();
-  const [path, setPath] = useState(location.pathname);
-
-  useEffect(() => {
-    setPath(location.pathname);
-  }, [location.pathname]);
-
-  let data = {};
-  if (path === '/' || path === '/Little-Lemon') {
-    data = headerData;
-  } else if (path === '/Reservations') {
-    data = reservationData;
-  } else if (path === '/OrderOnline') {
-    data = orderOnline;
-  }
-
+export default function App() {
   return (
     <>
-      <Navbar />
-      <DataContext.Provider value={data}>
-        <Routes>
-          <Route
-            path="/Little-Lemon"
-            element={
-              <>
-                <Header />
-                <Main />
-              </>
-            }
-          />
-          <Route
-            path="/"
-            element={
-              <>
-                <Header />
-                <Main />
-              </>
-            }
-          />
-          <Route
-            path="/Reservations"
-            element={
-              <>
-                <Header />
-                <Reservations />
-              </>
-            }
-          />
-          <Route
-            path="/OrderOnline"
-            element={
-              <>
-                <Header />
-                <OrderOnline />
-              </>
-            }
-          />
-          <Route path="/ConfirmedBooking" element={<ConfirmedBooking />} />
-        </Routes>
-      </DataContext.Provider>
+      <Navbar/>
+      <Routing />
       <Footer />
     </>
   );
 }
-
-export default App;
